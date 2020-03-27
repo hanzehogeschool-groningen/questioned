@@ -19,6 +19,6 @@ setup(
 
     entry_points='''
         [console_scripts]
-        questioned=questioned.main:cli
+        qst=questioned:cli
     '''
 )
