@@ -14,7 +14,8 @@ setup(
     keywords="Exam question generator",
 
     install_requires=[
-        "click==7.1.1"
+        "click==7.1.1",
+        "PyYAML==5.3.1"
     ],
 
     entry_points='''

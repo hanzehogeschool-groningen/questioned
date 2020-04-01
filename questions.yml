@@ -1,4 +1,12 @@
-meta: {}
+meta:
+  introduction: |
+    Welcome to this computer architectures practice exam.
+
+    * The exam must be completed within 90 minutes.
+    * You may not use a calculator.
+    * Please clearly note your name and student number on each page.
+
+    Good luck!
 questions:
 - answer: '147'
   question: Convert 0b10010011 to decimal.
