@@ -1,1 +1,8 @@
-# Database of questions for testing purposes
+meta: {}
+questions:
+- answer: '147'
+  question: Convert 0b10010011 to decimal.
+- answer: 3F
+  question: Convert 63 to hex.
+- answer: '291'
+  question: Convert 0x0123 to decimal
