@@ -2,7 +2,19 @@ meta: {}
 questions:
 - answer: '147'
   question: Convert 0b10010011 to decimal.
-- answer: 3F
+- answer: '3F'
   question: Convert 63 to hex.
 - answer: '291'
   question: Convert 0x0123 to decimal
+- answer: '35'
+  question: Convert 0x23 to decimal
+- answer: '9010'
+  question: Convert 0x2332 to decimal
+- answer: '213'
+  question: Convert 0b11010101 to decimal
+- answer: '0b11010000'
+  question: Convert 208 to binary
+- answer: '4353'
+  question: Convert 0x1101 to decimal
+- answer: '0x131'
+  question: Convert 305 to hex.
