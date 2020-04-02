@@ -128,4 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Questioned Specific Files
 exam.md
+answers.md
+questions.yml

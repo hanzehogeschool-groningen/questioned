@@ -13,7 +13,7 @@ from questioned import renderer
 @click.group()
 def cli():
     """
-    Command group to function as the main program entrypoint. Just a label. Can be empty.
+    Questioned is a tool for generating random exams. These exams are exported in markdown.
     """
 
 
