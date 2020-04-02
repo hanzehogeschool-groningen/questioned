@@ -6,7 +6,8 @@ def introduction_section_md(questions, meta: str) -> str:
     """
     Renders out an introduction section.
     """
-    out = "Practice Exam \n==================\n\n"
+    out = f"{meta['title']}\n"
+    out += '='.ljust(len(meta['title']), '=') + '\n\n'
     out += meta['introduction']
 
     out += f"This exam contains {len(questions)} questions.\n\n"

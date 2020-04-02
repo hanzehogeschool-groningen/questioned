@@ -13,6 +13,8 @@ setup(
     description="Computer Architectures Exam Generator",
     keywords="Exam question generator",
 
+    python_requires='>=3.8',
+
     install_requires=[
         "click==7.1.1",
         "PyYAML==5.3.1"
