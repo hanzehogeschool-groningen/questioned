@@ -21,7 +21,7 @@ def question_section_md(questions) -> str:
     """
     out = "## Questions \n\n"
     for number, question in enumerate(questions):
-        out += f"{number +1}. {question['question']}\n"
+        out += f"{number +1}. {question.question}\n"
     out += '\n\n'
     return out
 
@@ -32,5 +32,5 @@ def answers_section_md(questions) -> str:
     """
     out = "## Answers \n\n"
     for number, question in enumerate(questions):
-        out += f"{number +1}. {question['answer']}\n"
+        out += f"{number +1}. {question.answer}\n"
     return out

@@ -1,0 +1,28 @@
+meta:
+  title: Computer Architectures Practice Exam
+  introduction: |
+    Welcome to this computer architectures practice exam.
+
+    * The exam must be completed within 90 minutes.
+    * You may not use a calculator.
+    * Please clearly note your name and student number on each page.
+
+    Good luck!
+
+exam_content:
+- type: ConversionQuestion
+  count: 10
+- type: ManualEntryQuestion
+  count: 5
+
+manual_entry_questions:
+- question: "Do you like computers?"
+  answer: 'Yes'
+- question: "What is the best text editor?"
+  answer: "vim"
+- question: "Is C beter than Java?"
+  answer: "Obviously"
+- question: "Can you do conversion questions?"
+  answer: "Maybe"
+- question: "Is this exam great?"
+  answer: "Certainly"

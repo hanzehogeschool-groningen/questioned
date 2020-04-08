@@ -9,6 +9,7 @@ import click
 import yaml
 
 from questioned import renderer
+from questioned.questions import QUESTION_TYPES
 
 @click.group()
 def cli():
@@ -23,10 +24,10 @@ def cli():
 )
 @click.option(
     "-f",
-    "--question_file",
+    "--specfile",
     type=click.Path(exists=True, readable=True, dir_okay=False),
-    default="questions.yml",
-    help="Path to question definition file",
+    default="exam_spec.yml",
+    help="Path to exam specification file",
 )
 @click.option(
     "-o",
@@ -36,7 +37,7 @@ def cli():
     help="The file to write the exam to.",
 )
 @click.option("-d", "--debug", is_flag=True, default=False)
-def generate_exam(question_count, question_file, output_file, debug):
+def generate_exam(question_count, specfile, output_file, debug):
     """
     Exam generation command entrypoint.
     """
@@ -45,18 +46,17 @@ def generate_exam(question_count, question_file, output_file, debug):
     else:
         logging.basicConfig(level=logging.INFO)
 
-    logging.info("Loading Question Data")
-    question_data = yaml.load(open(question_file, "r"), Loader=yaml.SafeLoader)
-    logging.debug("Question Data loaded:")
-    logging.debug("\n, %s", yaml.dump(question_data))
+    logging.info("Loading Exam Spec")
+    exam_spec = yaml.load(open(specfile, "r"), Loader=yaml.SafeLoader)
+    logging.debug("Manual Entry Question Data loaded:")
+    logging.debug("\n, %s", yaml.dump(exam_spec['manual_entry_questions']))
 
-    logging.info("Selecting Questions")
-    selected_questions = select_questions(question_data, amount=question_count)
+    exam_questions = generate_questions(exam_spec)
 
     logging.info("Rendering Exam")
-    exam = renderer.introduction_section_md(selected_questions, question_data['meta'])
-    exam += renderer.question_section_md(selected_questions)
-    exam += renderer.answers_section_md(selected_questions)
+    exam = renderer.introduction_section_md(exam_questions, exam_spec['meta'])
+    exam += renderer.question_section_md(exam_questions)
+    exam += renderer.answers_section_md(exam_questions)
 
     logging.debug("Exam Output: \n %s", exam)
 
@@ -65,8 +65,14 @@ def generate_exam(question_count, question_file, output_file, debug):
         outfile.write(exam)
 
 
-def select_questions(question_data: dict, *, amount: int = 1) -> list:
+def generate_questions(exam_spec) -> list:
     """
     Selects a random list of questions from the question dataset.
     """
-    return list(random.sample(question_data["questions"], amount))
+    exam_layout = exam_spec['exam_content']
+    out = []
+
+    for section in exam_layout:
+        out += QUESTION_TYPES[section['type']].generate(exam_spec, count=section['count'])
+
+    return out
