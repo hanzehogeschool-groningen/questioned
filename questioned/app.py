@@ -20,9 +20,6 @@ def cli():
 
 @cli.command()
 @click.option(
-    "-c", "--question_count", default=5, help="Amount of questions to put in the exam."
-)
-@click.option(
     "-f",
     "--specfile",
     type=click.Path(exists=True, readable=True, dir_okay=False),
@@ -37,7 +34,7 @@ def cli():
     help="The file to write the exam to.",
 )
 @click.option("-d", "--debug", is_flag=True, default=False)
-def generate_exam(question_count, specfile, output_file, debug):
+def generate_exam(specfile, output_file, debug):
     """
     Exam generation command entrypoint.
     """
