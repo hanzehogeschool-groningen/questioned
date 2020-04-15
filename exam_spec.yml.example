@@ -10,6 +10,8 @@ meta:
     Good luck!
 
 exam_content:
+- type: LogicProblem
+  count: 5
 - type: ConversionQuestion
   count: 10
 - type: ManualEntryQuestion
