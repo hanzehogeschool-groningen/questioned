@@ -1,4 +1,4 @@
-# cQuestioned
+# Questioned
 ![Python package](https://github.com/DavidVisscher/questioned/workflows/Python%20package/badge.svg)
 
 Exam generator for testing computer architectures at the Hanze University of Applied Sciences.
