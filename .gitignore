@@ -130,5 +130,6 @@ dmypy.json
 
 # Questioned Specific Files
 exam.md
+exam.txt
 answers.md
 questions.yml

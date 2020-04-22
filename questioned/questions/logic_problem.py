@@ -12,6 +12,17 @@ class LogicProblem(Question):
     Defines a question that requires the student to solve a logical problem.
     """
 
+    def render_blackboard(self):
+        """
+        Renders the question for blackboard. Uses the True/False type.
+        """
+        out_question = self.question.replace('\n', '<br />')
+        question_section = f"{out_question}"
+        answer = str(self.answer).lower()
+        out = f"TF\t{question_section}\t{answer}\n"
+        return out
+
+
     @classmethod
     def generate(cls, exam_spec, count: int = 5):
         """

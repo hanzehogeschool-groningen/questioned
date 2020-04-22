@@ -2,6 +2,26 @@
 Contains functions for rendering to md.
 """
 
+
+def render_output(output_format, exam_questions, exam_spec, *args, **kwargs):
+    """
+    Delegates to the correct renderer based on the output_format.
+    """
+
+    # Use old markdown renderer if requested
+    if output_format == 'markdown':
+        exam = introduction_section_md(exam_questions, exam_spec['meta'])
+        exam += question_section_md(exam_questions)
+        exam += answers_section_md(exam_questions)
+        return exam
+
+    # Otherwise delegate to objects
+    exam = ""
+    for question in exam_questions:
+        exam += question.render(output_format, *args, **kwargs)
+    return exam
+
+
 def introduction_section_md(questions, meta: str) -> str:
     """
     Renders out an introduction section.

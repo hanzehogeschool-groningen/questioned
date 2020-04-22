@@ -51,7 +51,8 @@ class Question():
         """
         Renders the question for blackboard.
         """
-        out = f"SR\t{self.question}\t{self.answer}"
+        out_question = self.question.replace('\n', '<br />')
+        out = f"SR\t{out_question}\t{self.answer}\n"
         return out
 
     @classmethod

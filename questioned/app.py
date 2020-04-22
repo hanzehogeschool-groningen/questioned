@@ -34,7 +34,8 @@ def cli():
     help="The file to write the exam to.",
 )
 @click.option("-d", "--debug", is_flag=True, default=False)
-def generate_exam(specfile, output_file, debug):
+@click.option("-t", "--output_format", type=str, default="markdown")
+def generate_exam(specfile, output_file, debug, output_format):
     """
     Exam generation command entrypoint.
     """
@@ -50,10 +51,8 @@ def generate_exam(specfile, output_file, debug):
 
     exam_questions = generate_questions(exam_spec)
 
-    logging.info("Rendering Exam")
-    exam = renderer.introduction_section_md(exam_questions, exam_spec['meta'])
-    exam += renderer.question_section_md(exam_questions)
-    exam += renderer.answers_section_md(exam_questions)
+    logging.info("Rendering Exam to %s", output_format)
+    exam = renderer.render_output(output_format, exam_questions, exam_spec)
 
     logging.debug("Exam Output: \n %s", exam)
 
