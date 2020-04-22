@@ -18,6 +18,42 @@ class Question():
         self.question = question
         self.answer = answer
 
+    def render(self, output_format, *args, **kwargs) -> str:
+        """
+        Delegates to the applicable render format based on the output_format.
+
+        Renderer is selected based on function name, for example:
+        render('markdown') will call the render_markdown method.
+        render('blackboard') will call the render_blackboard method.
+        etc.
+
+        This functionality should probably be left alone when implementing your
+        own question classes.
+        """
+        if not hasattr(self, f'render_{output_format}'):
+            raise Exception(f'Renderer for {output_format} not available for {type(self)}')
+
+        renderer = getattr(self, f"render_{output_format}")
+
+        if not hasattr(renderer, '__call__'):
+            raise Exception(f"Renderer function render_{output_format} is not a function.")
+
+        return renderer(*args, **kwargs)
+
+    def render_markdown(self):
+        """
+        Renders the question to markdown.
+        """
+        out = f"{self.question}\n"
+        return out
+
+    def render_blackboard(self):
+        """
+        Renders the question for blackboard.
+        """
+        out = f"SR\t{self.question}\t{self.answer}"
+        return out
+
     @classmethod
     def generate(cls, exam_spec, count: int = 5):
         """
