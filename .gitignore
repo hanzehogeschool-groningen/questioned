@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # Questioned Specific Files
-exam.md
-exam.txt
+exam
+exam.*
 answers.md
 questions.yml

@@ -30,7 +30,7 @@ def cli():
     "-o",
     "--output_file",
     type=click.Path(writable=True, dir_okay=False),
-    default="exam.md",
+    default="exam",
     help="The file to write the exam to.",
 )
 @click.option("-d", "--debug", is_flag=True, default=False)
