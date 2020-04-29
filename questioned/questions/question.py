@@ -10,13 +10,16 @@ class Question():
     Can be extended to create different types of question.
     '''
 
-    def __init__(self, exam_spec: dict, question: str, answer: str):
+    def __init__(self, exam_spec: dict, question: str, answer: str, **kwargs):
         """
         Constructor for question objects.
         """
         self._exam_spec = exam_spec
         self.question = question
         self.answer = answer
+
+        for kwarg, value in kwargs.items():
+            setattr(self, kwarg, value)
 
     def render(self, output_format, *args, **kwargs) -> str:
         """
@@ -52,7 +55,7 @@ class Question():
         Renders the question for blackboard.
         """
         out_question = self.question.replace('\n', '<br />')
-        out = f"SR\t{out_question}\t{self.answer}\n"
+        out = f"FIB\t{out_question}\t{self.answer}\n"
         return out
 
     @classmethod
