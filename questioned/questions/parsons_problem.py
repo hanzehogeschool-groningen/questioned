@@ -4,6 +4,7 @@ This module defines the manual entry question.
 
 import random
 import logging
+import html
 
 from .question import Question
 
@@ -30,10 +31,10 @@ class ParsonsProblem(Question):
         for line in question_lines:
             if line.strip() == '':
                 continue
-            escaped_line = line.replace('[', '&#91;')\
-                               .replace(']', '&#93;')\
-                               .replace('>', '&gt;')\
-                               .replace('<', '&lt;')
+            escaped_line = html.escape(
+                line.replace('[', '&#91;')\
+                    .replace(']', '&#93;')
+            )
             out += ' - '
             out += escaped_line.strip()
             out += '<br />'
