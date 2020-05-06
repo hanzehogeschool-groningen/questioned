@@ -23,5 +23,11 @@ setup(
     entry_points='''
         [console_scripts]
         qst=questioned:cli
-    '''
+    ''',
+
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Environment :: Console",
+        "Intended Audience :: Science/Research"
+    ]
 )

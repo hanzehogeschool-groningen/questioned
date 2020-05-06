@@ -48,7 +48,7 @@ class ParsonsProblem(Question):
         out += '\t'
 
         # Add answers
-        for tup in ca_tuples:
+        for tup in random.sample(ca_tuples, k=len(ca_tuples)):
             out += f'{tup[1]}\t{tup[0]}\t\t'
 
         out = out[:-2] # Remove extraneous tabs
