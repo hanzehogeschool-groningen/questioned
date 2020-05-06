@@ -9,7 +9,7 @@ setup(
     include_package_data=True,
 
     author="David Visscher",
-    author_email="david@davidvisscher.nl",
+    author_email="pypi-dev@davidvisscher.nl",
     description="Computer Architectures Exam Generator",
     keywords="Exam question generator",
 
