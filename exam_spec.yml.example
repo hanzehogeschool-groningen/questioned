@@ -20,6 +20,9 @@ exam_content:
   count: 5
 
 manual_entry_questions:
+- question: "Does this graph look cool?"
+  answer: 'Yes'
+  image: "testimage.png"
 - question: "Do you like computers?"
   answer: 'Yes'
 - question: "What is the best text editor?"
@@ -28,8 +31,6 @@ manual_entry_questions:
   answer: "Obviously"
 - question: "Can you do conversion questions?"
   answer: "Maybe"
-- question: "Is this exam great?"
-  answer: "Certainly"
 
 
 parsons_problems:
