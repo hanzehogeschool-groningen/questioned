@@ -1,5 +1,5 @@
 """
-This module defines the manual entry question.
+This module defines the manual open question.
 """
 
 import base64
@@ -9,7 +9,7 @@ import logging
 from .question import Question
 
 
-class ManualEntryQuestion(Question):
+class ManualOpenQuestion(Question):
     """
     Defines a question that is input manually using the exam_spec file.
     """
@@ -23,7 +23,7 @@ class ManualEntryQuestion(Question):
         # pylint: disable=unsubscriptable-object
 
         out = []
-        selection = list(random.sample(exam_spec['manual_entry_questions'], count))
+        selection = list(random.sample(exam_spec['manual_open_questions'], count))
         for selected_question in selection:
             question_text = ""
             if 'image' in selected_question.keys():

@@ -46,8 +46,6 @@ def generate_exam(specfile, output_file, debug, output_format):
 
     logging.info("Loading Exam Spec")
     exam_spec = yaml.load(open(specfile, "r"), Loader=yaml.SafeLoader)
-    logging.debug("Manual Entry Question Data loaded:")
-    logging.debug("\n, %s", yaml.dump(exam_spec['manual_entry_questions']))
 
     exam_questions = generate_questions(exam_spec)
 

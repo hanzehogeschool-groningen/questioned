@@ -16,10 +16,12 @@ exam_content:
   count: 5
 - type: ConversionQuestion
   count: 10
-- type: ManualEntryQuestion
+- type: ManualOpenQuestion
   count: 5
+- type: ManualMultipleChoiceQuestion
+  count: 3
 
-manual_entry_questions:
+manual_open_questions:
 - question: "Does this graph look cool?"
   answer: 'Yes'
   image: "testimage.png"
@@ -32,6 +34,26 @@ manual_entry_questions:
 - question: "Can you do conversion questions?"
   answer: "Maybe"
 
+manual_multiple_choice_questions:
+- question: "Which text editor is best?"
+  image: "testimage.png"
+  correct_answer: "vim"
+  incorrect_answers:
+    - "emacs"
+    - "nano"
+    - "notepad"
+- question: "What bear is best?"
+  correct_answer: "black bear"
+  incorrect_answers:
+    - "brown bear"
+    - "polar bear"
+    - "teddy bear"
+- question: "What is the Answer to the Ultimate Question of Life, the Universe, and Everything?"
+  correct_answer: "42"
+  incorrect_answers:
+    - "12"
+    - "24"
+    - "-1"
 
 parsons_problems:
 - description: "Testtekst"
