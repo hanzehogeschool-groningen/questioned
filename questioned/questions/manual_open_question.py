@@ -30,7 +30,10 @@ class ManualOpenQuestion(Question):
                 logging.debug('Encountered question with image path %s', selected_question['image'])
                 with open(selected_question['image'], 'rb') as image_file:
                     image_base64 = base64.b64encode(image_file.read())
-                    question_text += f'<img src="data:image/png;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
+                    if 'jpeg' in selected_question['image'] or 'jpg' in selected_question['image']:
+                        question_text += f'<img src="data:image/jpeg;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
+                    if 'png' in selected_question['image']:
+                        question_text += f'<img src="data:image/png;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
 
             question_text += selected_question['question']
             out.append(
