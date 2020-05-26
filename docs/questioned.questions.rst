@@ -1,10 +1,7 @@
-questioned.questions package
+Question Listing
 ============================
 
-Submodules
-----------
-
-questioned.questions.logic\_problem module
+Logic Problem
 ------------------------------------------
 
 .. automodule:: questioned.questions.logic_problem
@@ -12,7 +9,7 @@ questioned.questions.logic\_problem module
    :undoc-members:
    :show-inheritance:
 
-questioned.questions.manual\_multiple\_choice\_question module
+Manual Multiple Choice Question
 --------------------------------------------------------------
 
 .. automodule:: questioned.questions.manual_multiple_choice_question
@@ -20,7 +17,7 @@ questioned.questions.manual\_multiple\_choice\_question module
    :undoc-members:
    :show-inheritance:
 
-questioned.questions.manual\_open\_question module
+Manual Open Question
 --------------------------------------------------
 
 .. automodule:: questioned.questions.manual_open_question
@@ -28,7 +25,7 @@ questioned.questions.manual\_open\_question module
    :undoc-members:
    :show-inheritance:
 
-questioned.questions.parsons\_problem module
+Parsons Problem
 --------------------------------------------
 
 .. automodule:: questioned.questions.parsons_problem
@@ -36,7 +33,7 @@ questioned.questions.parsons\_problem module
    :undoc-members:
    :show-inheritance:
 
-questioned.questions.question module
+Question
 ------------------------------------
 
 .. automodule:: questioned.questions.question
@@ -44,7 +41,7 @@ questioned.questions.question module
    :undoc-members:
    :show-inheritance:
 
-questioned.questions.radix\_conversion\_question module
+Radix Conversion Question
 -------------------------------------------------------
 
 .. automodule:: questioned.questions.radix_conversion_question

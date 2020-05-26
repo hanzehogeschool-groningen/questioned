@@ -8,13 +8,19 @@ Questioned
 
 Welcome to the documentation site for questioned.
 
+This site contains documentation about the ``questioned`` python package,
+as well as guides for users looking to make use of questioned to generate
+exams.
+
+If you're new to questioned, check out the :doc:`Getting Started Guide <getting_started>`.
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
    :caption: Contents:
 
    installation
    getting_started
+   questioned.questions
 
    questioned
 
