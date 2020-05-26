@@ -9,3 +9,6 @@ Can generate exams based on the `exam_spec.yml` file. Which contains information
 The software is written in such a way that it can be given to students, so they can generate their own practice exam, but can also be used to generate the final exam.
 
 All secrets are kept within the `exam_spec.yml` file.
+
+Documentation for the project can be found here:
+https://questioned.readthedocs.io/
