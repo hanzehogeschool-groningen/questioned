@@ -12,7 +12,37 @@ from .question import Question
 class ManualMultipleChoiceQuestion(Question):
     """
     Defines a question that is input manually using the exam_spec file.
+
+    This question type requires the student to select an answer from a given
+    group of answers. One of these answers is correct.
+
+    The question text is passed through the ``question`` parameter.
+
+    The correct answer is passed using the ``correct_answer`` parameter.
+    There must be only one of these.
+
+    The incorrect answers, otherwise known as distractors, are provided as
+    a list to the ``incorrect_answers`` parameter. This list may be
+    arbitrarily long, but be aware that blackboard does not support more
+    than 255 total answers, including the correct answer.
+
+    Though, creating a list of options this long may have other practical
+    implication.
+
+    Supports the inclusion of images above the question text, similar to
+    :py:class:`ManualOpenQuestion <questioned.questions.manual_open_question.ManualOpenQuestion>`.
+
     The order of choices is randomized.
+
+    Exam Spec example:
+    ::
+        manual_multiple_choice_questions:
+        - question: "What is the Answer to the Ultimate Question of Life, the Universe, and Everything?"
+          correct_answer: "42"
+          incorrect_answers:
+            - "12"
+            - "24"
+            - "-1"
     """
 
     def render_markdown(self):

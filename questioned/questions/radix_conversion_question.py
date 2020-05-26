@@ -9,7 +9,13 @@ from .question import Question
 
 class RadixConversionQuestion(Question):
     """
-    Defines a question that is input manually using the exam_spec file.
+    Defines a radix conversion question.
+
+    This question type requires the student to convert a number from one base
+    to another. For example from hexadecimal to decimal, or from binary to
+    decimal, etc.
+
+    This question type requires no extra information from the exam_spec.
     """
 
     @classmethod

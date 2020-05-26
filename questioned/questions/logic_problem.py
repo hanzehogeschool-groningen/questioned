@@ -10,6 +10,13 @@ from .question import Question
 class LogicProblem(Question):
     """
     Defines a question that requires the student to solve a logical problem.
+
+    The student is provided with a boolean logic expressions and a set of initial
+    values. The student is then required to evaluate the expression and 
+    provide the resulting value in the form of a boolean (True or False)
+
+    These logical problems are fully randomly generated and require no
+    input through the exam_spec.
     """
 
     def render_blackboard(self):

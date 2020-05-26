@@ -11,7 +11,41 @@ from .question import Question
 
 class ParsonsProblem(Question):
     """
-    Defines a question that is input manually using the exam_spec file.
+    Defines a parsons problem that is input manually using the exam_spec file.
+
+    This question type is based on a paper by Paul Denny, Andrex Luxton-Reilly 
+    and Beth Simon. The paper can be found at 
+    https://cseweb.ucsd.edu/classes/fa08/cse599/denny.pdf
+    
+    Though the basic structure of this question type is similar to the one
+    described in the paper. It does not support the more complex rubrics that
+    would require a human to correct the exam.
+    
+    Instead, it is best to focus on shorter code snippets where ordering is
+    the main focus of the problem.
+
+    The parsons problem requires additional information through the ``exam_spec``.
+    
+    For example:
+    ::
+        parsons_problems:
+        - description: "Pyramid printing function."
+          code: |
+            #include<stdio.h>
+            int main() {
+                int i, j, rows;
+                printf("Enter number of rows: ");
+                scanf("%d", &rows);
+                for (i=1; i<=rows; ++i) {
+                    for (j=1; j<=i; ++j)
+                    { printf("* "); }
+                    printf("\\n");}
+                return 0;}
+
+    All parsons problems require at least a description and a code segment.
+    
+    The code segment is automatically broken up into lines and jumbled for
+    the assignment. As such it must be entered in the correct form.
     """
 
     def render_blackboard(self):
