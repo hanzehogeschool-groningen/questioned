@@ -7,7 +7,7 @@ import random
 from .question import Question
 
 
-class ConversionQuestion(Question):
+class RadixConversionQuestion(Question):
     """
     Defines a question that is input manually using the exam_spec file.
     """

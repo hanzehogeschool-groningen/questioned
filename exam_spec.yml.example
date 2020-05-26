@@ -14,7 +14,7 @@ exam_content:
   count: 2
 - type: LogicProblem
   count: 5
-- type: ConversionQuestion
+- type: RadixConversionQuestion
   count: 10
 - type: ManualOpenQuestion
   count: 5
