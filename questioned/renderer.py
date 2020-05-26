@@ -41,7 +41,7 @@ def question_section_md(questions) -> str:
     """
     out = "## Questions \n\n"
     for number, question in enumerate(questions):
-        out += f"### Question {number}\n"
+        out += f"### Question {number +1}\n"
         out += question.render('markdown')
         out += '\n'
     out += '\n\n'
