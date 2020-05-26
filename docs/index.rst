@@ -3,12 +3,18 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to questioned's documentation!
+Questioned
 ======================================
+
+Welcome to the documentation site for questioned.
+
 
 .. toctree::
    :maxdepth: 4
    :caption: Contents:
+
+   installation
+   getting_started
 
    questioned
 
