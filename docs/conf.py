@@ -27,7 +27,7 @@ version = 'latest'
 # The full version, including alpha/beta/rc tags
 release = 'latest'
 
-master_doc = '_index'
+master_doc = 'index'
 
 
 # -- General configuration ---------------------------------------------------
