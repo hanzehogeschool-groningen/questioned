@@ -1,4 +1,5 @@
-![Questioned Logo](https://raw.githubusercontent.com/DavidVisscher/questioned/master/docs/_static/Questioned.svg)
+![Questioned Logo](https://raw.githubusercontent.com/DavidVisscher/questioned/master/docs/_static/Questioned.svg | width=500 )
+
 # Questioned
 ![Python package](https://github.com/DavidVisscher/questioned/workflows/Python%20package/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/questioned/badge/?version=latest)](https://questioned.readthedocs.io/en/latest/?badge=latest)
