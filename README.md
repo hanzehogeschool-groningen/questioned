@@ -1,4 +1,6 @@
+<center>
 <img src="https://raw.githubusercontent.com/DavidVisscher/questioned/master/docs/_static/Questioned.svg" data-canonical="https://raw.githubusercontent.com/DavidVisscher/questioned/master/docs/_static/Questioned.svg" width="500" />
+</center>
 
 # Questioned
 ![Python package](https://github.com/DavidVisscher/questioned/workflows/Python%20package/badge.svg)
