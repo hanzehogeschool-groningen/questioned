@@ -6,8 +6,6 @@ import base64
 import random
 import logging
 
-from IPython import embed
-
 from .question import Question
 
 
