@@ -177,11 +177,12 @@ Let us take the following ``exam_spec.yml`` as an example:
     
     manual_multiple_choice_questions:
     - question: "What is the Answer to the Ultimate Question of Life, the Universe, and Everything?"
-      correct_answer: "42"
-      incorrect_answers:
-        - "12"
-        - "24"
-        - "-1"
+      randomize_order: False
+      answers:
+        - "-1": False
+        - "12": False
+        - "24": False
+        - "42": True
     
     parsons_problems:
     - description: "Pyramid printing function."
@@ -348,10 +349,10 @@ This ``exam_spec.yml`` will generate an exam similar to the following:
     
     ### Question 19
     What is the Answer to the Ultimate Question of Life, the Universe, and Everything?
-     - 42
-     - 24
      - -1
      - 12
+     - 24
+     - 42
     
     
     
