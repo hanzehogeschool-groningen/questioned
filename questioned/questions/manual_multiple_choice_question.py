@@ -16,7 +16,7 @@ class ManualMultipleChoiceQuestion(Question):
     Defines a question that is input manually using the exam_spec file.
 
     This question type requires the student to select an answer from a given
-    group of answers. One of these answers is correct.
+    group of answers. Only one of these answers is correct.
 
     The question text is passed through the ``question`` parameter.
 
@@ -70,6 +70,9 @@ class ManualMultipleChoiceQuestion(Question):
         
         self._answers = self.process_answers(raw_answers)
 
+        if len(self.correct_answers) > 1:
+            raise ValueError(f"Multiple correct answers provided for multiple choice question:\n\t{raw_answers}")
+
     
     def process_answers(self, raw_answers):
         """
@@ -91,12 +94,9 @@ class ManualMultipleChoiceQuestion(Question):
         """
         Gives the string representation of the correct answer.
         """
-        out = ""
-        for correct_answer in self.correct_answers:
-            if out != "":
-                out += " or "
-            out += correct_answer
-
+        for possible_answer, correct in self._answers:
+            if correct:
+                return possible_answer
 
     @property
     def correct_answers(self) -> list:
