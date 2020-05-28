@@ -6,6 +6,8 @@ import base64
 import random
 import logging
 
+from IPython import embed
+
 from .question import Question
 
 
@@ -18,16 +20,19 @@ class ManualMultipleChoiceQuestion(Question):
 
     The question text is passed through the ``question`` parameter.
 
-    The correct answer is passed using the ``correct_answer`` parameter.
-    There must be only one of these.
+    The possible answers is provided as a list through the ``answers`` parameter.
 
-    The incorrect answers, otherwise known as distractors, are provided as
-    a list to the ``incorrect_answers`` parameter. This list may be
-    arbitrarily long, but be aware that blackboard does not support more
+    This list contains the answers, as well as whether or not they are correct.
+
+    This list can arbitrarily long, but be aware that blackboard does not support more
     than 255 total answers, including the correct answer.
 
     Though, creating a list of options this long may have other practical
     implication.
+
+    By default, the list is shuffled by the software, but the list can be
+    ordered manually by setting the ``randomize_order`` parameter to
+    ``False``. In that case, answers are stated in the order they are provided.
 
     Supports the inclusion of images above the question text, similar to
     :py:class:`ManualOpenQuestion <questioned.questions.manual_open_question.ManualOpenQuestion>`.
@@ -38,38 +43,111 @@ class ManualMultipleChoiceQuestion(Question):
     ::
         manual_multiple_choice_questions:
         - question: "What is the Answer to the Ultimate Question of Life, the Universe, and Everything?"
-          correct_answer: "42"
-          incorrect_answers:
-            - "12"
-            - "24"
-            - "-1"
+          randomize_order: False
+          answers:
+            - "-1": False
+            - "12": False
+            - "24": False
+            - "42": True
     """
 
-    def render_markdown(self):
+
+    def __init__(self, exam_spec: dict, question:str, raw_answers: list, **kwargs):
+        """
+        Constructor for this question object.
+        Overrides the standard constructor to support the
+        multiple answers scheme.
+        """
+        self._exam_spec = exam_spec
+
+        self.question = question
+
+        if not 'randomize_order' in kwargs:
+            self.randomize_order = True
+
+        for kwarg, value in kwargs.items():
+            setattr(self, kwarg, value)
+        
+        self._answers = self.process_answers(raw_answers)
+
+    
+    def process_answers(self, raw_answers):
+        """
+        Formats the raw answer input into something more usable.
+        """
+        out = []
+        for raw_answer in raw_answers:
+            item = list(raw_answer.items())[0] # Get first and only item.
+            out.append(item)
+
+        if self.randomize_order:
+            random.shuffle(out)
+        
+        return out
+
+
+    @property
+    def answer(self) -> str:
+        """
+        Gives the string representation of the correct answer.
+        """
+        out = ""
+        for correct_answer in self.correct_answers:
+            if out != "":
+                out += " or "
+            out += correct_answer
+
+
+    @property
+    def correct_answers(self) -> list:
+        """
+        Returns a list of all answers deemed correct by the question.
+        """
+        out = []
+        for possible_answer, correct in self._answers:
+            if correct:
+                out.append(possible_answer)
+        return out
+
+
+    @property
+    def incorrect_answers(self) -> list:
+        """
+        Returns a list of all answers deemed incorrect by the question.
+        """
+        out = []
+        for possible_answer, correct in self._answers:
+            if not correct:
+                out.append(possible_answer)
+        return out
+
+
+    def render_markdown(self) -> str:
         """
         Renders the markdown output for this question.
         """
         out = f"{self.question}\n"
-        possible_answers =  self.incorrect_answers + [self.answer]
-        random.shuffle(possible_answers)
-        for possible_answer in possible_answers:
+        possible_answers = self._answers
+   
+        for possible_answer, correctness in possible_answers:
             out += f" - {possible_answer}\n"
         return out
 
-    def render_blackboard(self):
+
+    def render_blackboard(self) -> str:
         """
         Renders the blackboard question.
         """
         out_question = self.question.replace('\n', '<br />')
         out = f"MC\t{out_question}\t"
-        answers = [(self.answer, 'correct')]
-        for incorrect_answer in self.incorrect_answers:
-            answers.append( (incorrect_answer, 'incorrect') )
 
-        random.shuffle(answers)
-        for answer in answers:
-            out += f'{answer[0]}\t{answer[1]}\t'
-        
+        for answer, correct in self._answers:
+            correct_text = 'incorrect'
+            if correct:
+                correct_text = 'correct'
+            
+            out += f'{answer}\t{correct_text}\t'
+
         out = out[:-1]  # We drop the last tab here
         out += '\n'
 
@@ -77,7 +155,7 @@ class ManualMultipleChoiceQuestion(Question):
 
 
     @classmethod
-    def generate(cls, exam_spec, count: int = 5):
+    def generate(cls, exam_spec, count: int = 5) -> list:
         """
         Generates an amount of manually input questions.
         """
@@ -98,12 +176,21 @@ class ManualMultipleChoiceQuestion(Question):
                         question_text += f'<img src="data:image/png;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
 
             question_text += selected_question['question']
-            out.append(
-                cls(
-                    exam_spec,
-                    question_text,
-                    selected_question['correct_answer'],
-                    incorrect_answers=selected_question['incorrect_answers']
+            if 'randomize_order' in selected_question.keys():
+                out.append(
+                    cls(
+                        exam_spec,
+                        question_text,
+                        selected_question['answers'],
+                        randomize_order=selected_question['randomize_order'],
+                    )
                 )
-            )
+            else:
+                out.append(
+                    cls(
+                        exam_spec,
+                        question_text,
+                        selected_question['answers'],
+                    )
+                )
         return out

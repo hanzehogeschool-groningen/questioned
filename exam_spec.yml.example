@@ -37,23 +37,25 @@ manual_open_questions:
 manual_multiple_choice_questions:
 - question: "Which text editor is best?"
   image: "testimage.png"
-  correct_answer: "vim"
-  incorrect_answers:
-    - "emacs"
-    - "nano"
-    - "notepad"
+  answers:
+    - "vim": True
+    - "emacs": False
+    - "nano": False
+    - "notepad" : False
 - question: "What bear is best?"
-  correct_answer: "black bear"
-  incorrect_answers:
-    - "brown bear"
-    - "polar bear"
-    - "teddy bear"
+  randomize_order: True
+  answers:
+    - "black bear": True
+    - "brown bear": False
+    - "polar bear": False
+    - "teddy bear": False
 - question: "What is the Answer to the Ultimate Question of Life, the Universe, and Everything?"
-  correct_answer: "42"
-  incorrect_answers:
-    - "12"
-    - "24"
-    - "-1"
+  randomize_order: False
+  answers:
+    - "-1": False
+    - "12": False
+    - "24": False
+    - "42": True
 
 parsons_problems:
 - description: "Testtekst"
