@@ -1,8 +1,5 @@
-<center>
-<img src="https://raw.githubusercontent.com/DavidVisscher/questioned/master/docs/_static/Questioned.svg" data-canonical="https://raw.githubusercontent.com/DavidVisscher/questioned/master/docs/_static/Questioned.svg" width="500" />
-</center>
-
-# Questioned
+<img src="https://raw.githubusercontent.com/DavidVisscher/questioned/master/docs/_static/Questioned.svg" data-canonical="https://raw.githubusercontent.com/DavidVisscher/questioned/master/docs/_static/Questioned.svg" width="300" />
+-------------------------------------------------------------------------------------------------
 ![Python package](https://github.com/DavidVisscher/questioned/workflows/Python%20package/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/questioned/badge/?version=latest)](https://questioned.readthedocs.io/en/latest/?badge=latest)
 
