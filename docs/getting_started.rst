@@ -56,7 +56,11 @@ otherwise be specified using the ``-f`` flag.
 .. _yaml: https://yaml.org/
 
 A very simple ``exam_spec.yml`` may look like this:
-::
+
+
+.. code-block:: yaml
+    :linenos:   
+    
     meta:
       title: "Test Exam"
       introduction: "Have fun!"
@@ -128,11 +132,15 @@ The different output formats can be selected using the ``-t`` flag.
 
 For example, the following command will write out a blackboard-importable
 questions file:
-::
+
+.. code-block:: sh
+
     $ qst generate-exam -f exam_spec.yml -o exam.txt -t blackboard
 
 The file ``exam.txt`` will then contain the following output:
-::
+
+.. code-block:: plain
+
     FIB     Isn't this great!?      True
 
 This file can then be imported into a blackboard exam.
@@ -147,7 +155,9 @@ picked in the section in the ``exam_layout``.
 
 For example:
 
-::
+.. code-block:: yaml
+    :linenos:
+
     exam_content:
     - type: ManualOpenQuestion
       count: 1
@@ -189,7 +199,10 @@ Now that we've learned how to create a simple exam_spec, we can expand upon that
 spec to create a larger, more varied exam.
 
 Let us take the following ``exam_spec.yml`` as an example:
-::
+
+.. code-block:: yaml
+    :linenos:
+    
     meta:
       title: Computer Architectures Practice Exam
       introduction: |

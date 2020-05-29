@@ -25,18 +25,18 @@ exam_content:
   group: "editors"
 
 manual_open_questions:
-- question: "Does this graph look cool?"
-  answer: 'Yes'
+- question: "does this graph look cool?"
+  answer: 'yes'
   image: "testimage.png"
-- question: "Do you like computers?"
-  answer: 'Yes'
-- question: "What is the best text editor?"
+- question: "do you like computers?"
+  answer: 'yes'
+- question: "what is the best text editor?"
   group: "editors"
   answer: "vim"
-- question: "Is C beter than Java?"
-  answer: "Obviously"
-- question: "Can you do conversion questions?"
-  answer: "Maybe"
+- question: "is c beter than java?"
+  answer: "obviously"
+- question: "can you do conversion questions?"
+  answer: "maybe"
 
 manual_multiple_choice_questions:
 - question: "Which text editor is best?"
