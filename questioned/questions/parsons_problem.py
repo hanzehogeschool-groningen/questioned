@@ -60,7 +60,12 @@ class ParsonsProblem(Question):
         for line_nr in range(len(answer_lines)-1):
             ca_tuples.append([line_nr, answer_lines[line_nr], question_lines[line_nr]])
 
-        out = f"JUMBLED_SENTENCE\tPlease reassemble the following code snippets to form a {self.description}.<br/><br/>"
+        if self.image is not None:
+            image = self.image
+        else:
+            image = "NO IMAGE"
+
+        out = f"JUMBLED_SENTENCE\t{image}Please reassemble the following code snippets to form a {self.description}.<br/><br/>"
         out += "<pre>"
         for line in question_lines:
             if line.strip() == '':
@@ -117,7 +122,8 @@ class ParsonsProblem(Question):
             problem = cls(exam_spec,
                           jumbled_str,
                           selected_problem['code'],
-                          description=selected_problem['description']
+                          description=selected_problem['description'],
+                          question_data=selected_problem
                          )
             out.append(problem)
         return out

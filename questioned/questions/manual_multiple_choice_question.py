@@ -50,18 +50,20 @@ class ManualMultipleChoiceQuestion(Question):
     """
 
 
-    def __init__(self, exam_spec: dict, question:str, raw_answers: list, **kwargs):
+    def __init__(self, exam_spec: dict, question:str, raw_answers: list, *, question_data:dict={}, **kwargs):
         """
         Constructor for this question object.
         Overrides the standard constructor to support the
         multiple answers scheme.
         """
         self._exam_spec = exam_spec
-
         self.question = question
+        self.question_data = question_data
 
-        if not 'randomize_order' in kwargs:
+        if not 'randomize_order' in self.question_data.keys():
             self.randomize_order = True
+        else:
+            self.randomize_order = self.question_data['randomize_order']
 
         for kwarg, value in kwargs.items():
             setattr(self, kwarg, value)
@@ -163,32 +165,13 @@ class ManualMultipleChoiceQuestion(Question):
         out = []
         selection = list(random.sample(exam_spec['manual_multiple_choice_questions'], count))
         for selected_question in selection:
-            question_text = ""
-            if 'image' in selected_question.keys():
-                logging.debug('Encountered question with image path %s', selected_question['image'])
-                with open(selected_question['image'], 'rb') as image_file:
-                    image_base64 = base64.b64encode(image_file.read())
-                    if 'jpeg' in selected_question['image'] or 'jpg' in selected_question['image']:
-                        question_text += f'<img src="data:image/jpeg;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
-                    if 'png' in selected_question['image']:
-                        question_text += f'<img src="data:image/png;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
-
-            question_text += selected_question['question']
-            if 'randomize_order' in selected_question.keys():
-                out.append(
-                    cls(
-                        exam_spec,
-                        question_text,
-                        selected_question['answers'],
-                        randomize_order=selected_question['randomize_order'],
-                    )
+            question_text = selected_question['question']
+            out.append(
+                cls(
+                    exam_spec,
+                    question_text,
+                    selected_question['answers'],
+                    question_data= selected_question
                 )
-            else:
-                out.append(
-                    cls(
-                        exam_spec,
-                        question_text,
-                        selected_question['answers'],
-                    )
-                )
+            )
         return out

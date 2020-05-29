@@ -65,6 +65,7 @@ parsons_problems:
     Test 3
     Test 4
 - description: "Pyramid printing function."
+  image: "testimage.png"
   code: |
     #include<stdio.h>
     int main() {
