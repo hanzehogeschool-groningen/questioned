@@ -6,6 +6,8 @@ import base64
 import random
 import logging
 
+from questioned.utils import select_questions
+
 from .question import Question
 
 
@@ -155,7 +157,7 @@ class ManualMultipleChoiceQuestion(Question):
 
 
     @classmethod
-    def generate(cls, exam_spec, count: int = 5) -> list:
+    def generate(cls, exam_spec, count: int = 5, section_data = {}) -> list:
         """
         Generates an amount of manually input questions.
         """
@@ -163,7 +165,7 @@ class ManualMultipleChoiceQuestion(Question):
         # pylint: disable=unsubscriptable-object
 
         out = []
-        selection = list(random.sample(exam_spec['manual_multiple_choice_questions'], count))
+        selection = select_questions(cls, exam_spec, 'manual_multiple_choice_questions', count, section_data)
         for selected_question in selection:
             question_text = selected_question['question']
             out.append(

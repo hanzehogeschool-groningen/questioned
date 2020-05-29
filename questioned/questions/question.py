@@ -89,9 +89,8 @@ class Question():
             else:
                 raise ValueError(f'Unsupported image type for image: {self.image_path}')
 
-
     @classmethod
-    def generate(cls, exam_spec, count: int = 5):
+    def generate(cls, exam_spec, count: int = 5, section_data = {}):
         """
         Returns an amount of this object.
         """

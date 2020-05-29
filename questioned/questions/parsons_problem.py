@@ -6,6 +6,8 @@ import random
 import logging
 import html
 
+from questioned.utils import select_questions
+
 from .question import Question
 
 
@@ -63,7 +65,7 @@ class ParsonsProblem(Question):
         if self.image is not None:
             image = self.image
         else:
-            image = "NO IMAGE"
+            image = ""
 
         out = f"JUMBLED_SENTENCE\t{image}Please reassemble the following code snippets to form a {self.description}.<br/><br/>"
         out += "<pre>"
@@ -107,12 +109,12 @@ class ParsonsProblem(Question):
         return out
 
     @classmethod
-    def generate(cls, exam_spec, count: int = 1):
+    def generate(cls, exam_spec, count: int = 1, section_data = {}):
         """
         Generates an amount of manually input questions.
         """
         out = []
-        selection = list(random.sample(exam_spec['parsons_problems'], count))
+        selection = select_questions(cls, exam_spec, 'parsons_problems', count, section_data)
         for selected_problem in selection:
             lines = selected_problem['code'].split('\n')
             jumbled_lines = random.sample(lines, k=len(lines))

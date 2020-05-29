@@ -17,9 +17,12 @@ exam_content:
 - type: RadixConversionQuestion
   count: 10
 - type: ManualOpenQuestion
-  count: 5
+  count: 1
 - type: ManualMultipleChoiceQuestion
   count: 3
+- type: ManualOpenQuestion
+  count: 1
+  group: "editors"
 
 manual_open_questions:
 - question: "Does this graph look cool?"
@@ -28,6 +31,7 @@ manual_open_questions:
 - question: "Do you like computers?"
   answer: 'Yes'
 - question: "What is the best text editor?"
+  group: "editors"
   answer: "vim"
 - question: "Is C beter than Java?"
   answer: "Obviously"

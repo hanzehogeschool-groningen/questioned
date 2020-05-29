@@ -31,7 +31,7 @@ class LogicProblem(Question):
 
 
     @classmethod
-    def generate(cls, exam_spec, count: int = 5):
+    def generate(cls, exam_spec, count: int = 5, section_data = {}):
         """
         Generates an amount of manually input questions.
         """

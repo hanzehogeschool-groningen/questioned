@@ -67,6 +67,6 @@ def generate_questions(exam_spec) -> list:
     out = []
 
     for section in exam_layout:
-        out += QUESTION_TYPES[section['type']].generate(exam_spec, count=section['count'])
+        out += QUESTION_TYPES[section['type']].generate(exam_spec, count=section['count'], section_data=section)
 
     return out

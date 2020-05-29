@@ -2,9 +2,7 @@
 This module defines the manual open question.
 """
 
-import base64
-import random
-import logging
+from questioned.utils import select_questions
 
 from .question import Question
 
@@ -38,7 +36,7 @@ class ManualOpenQuestion(Question):
     """
 
     @classmethod
-    def generate(cls, exam_spec, count: int = 5):
+    def generate(cls, exam_spec, count: int = 5, section_data = {}):
         """
         Generates an amount of manually input questions.
         """
@@ -46,7 +44,9 @@ class ManualOpenQuestion(Question):
         # pylint: disable=unsubscriptable-object
 
         out = []
-        selection = list(random.sample(exam_spec['manual_open_questions'], count))
+        
+        selection = select_questions(cls, exam_spec, 'manual_open_questions', count, section_data)
+
         for selected_question in selection:
             out.append(
                 cls(
