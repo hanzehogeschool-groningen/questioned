@@ -138,6 +138,51 @@ The file ``exam.txt`` will then contain the following output:
 This file can then be imported into a blackboard exam.
 
 
+Grouping Questions
+-------------------
+
+It is possible to divide your manually entered questions into groups.
+You can then specify from which group you wish the questions to be
+picked in the section in the ``exam_layout``.
+
+For example:
+
+::
+    exam_content:
+    - type: ManualOpenQuestion
+      count: 1
+      group: "graphs"
+    - type: ManualOpenQuestion
+      count: 1
+      group: "editors"
+    - type: ManualOpenQuestion
+      count: 1
+      group: "opinions"
+    
+    manual_open_questions:
+    - question: "does this graph look cool?"
+      answer: 'yes'
+      image: "testimage.png"
+      group: "graphs"
+    - question: "do you like computers?"
+      group: "opinions"
+      answer: 'yes'
+    - question: "what is the best text editor?"
+      group: "editors"
+      answer: "vim"
+    - question: "is c beter than java?"
+      answer: "obviously"
+      group: "opinions"
+    - question: "can you do conversion questions?"
+      answer: "maybe"
+
+Using this exam spec, the generated exam will contain:
+
+ * One question which has group 'graphs'
+ * One question which has group 'editors'
+ * One question which has group 'opinions'
+
+
 A more complex exam spec
 ------------------------
 Now that we've learned how to create a simple exam_spec, we can expand upon that
