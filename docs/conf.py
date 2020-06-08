@@ -71,7 +71,7 @@ html_static_path = ['_static']
 
 html_theme_options = {
     'logo': 'Questioned.svg',
-    'github_user': 'DavidVisscher',
+    'github_user': 'hanzehogeschool-groningen',
     'github_repo': 'questioned'
 }
 
