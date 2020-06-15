@@ -12,7 +12,7 @@ class LogicProblem(Question):
     Defines a question that requires the student to solve a logical problem.
 
     The student is provided with a boolean logic expressions and a set of initial
-    values. The student is then required to evaluate the expression and 
+    values. The student is then required to evaluate the expression and
     provide the resulting value in the form of a boolean (True or False)
 
     These logical problems are fully randomly generated and require no
@@ -31,10 +31,13 @@ class LogicProblem(Question):
 
 
     @classmethod
-    def generate(cls, exam_spec, count: int = 5, section_data = {}):
+    def generate(cls, exam_spec, count: int = 5, section_data=None):
         """
         Generates an amount of manually input questions.
         """
+        if section_data is None:
+            section_data = {}
+
         out = []
         for _ in range(count):
             variables = [

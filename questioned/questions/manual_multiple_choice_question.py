@@ -2,9 +2,7 @@
 This module defines the manual open question.
 """
 
-import base64
 import random
-import logging
 
 from questioned.utils import select_questions
 
@@ -51,8 +49,10 @@ class ManualMultipleChoiceQuestion(Question):
             - "42": True
     """
 
+    # This is an accepted shortcoming of the design.
+    # pylint: disable=super-init-not-called
 
-    def __init__(self, exam_spec: dict, question:str, raw_answers: list, *, question_data:dict={}, **kwargs):
+    def __init__(self, exam_spec: dict, question: str, raw_answers: list, *, question_data: dict = {}, **kwargs):
         """
         Constructor for this question object.
         Overrides the standard constructor to support the
@@ -62,20 +62,20 @@ class ManualMultipleChoiceQuestion(Question):
         self.question = question
         self.question_data = question_data
 
-        if not 'randomize_order' in self.question_data.keys():
+        if 'randomize_order' not in self.question_data.keys():
             self.randomize_order = True
         else:
             self.randomize_order = self.question_data['randomize_order']
 
         for kwarg, value in kwargs.items():
             setattr(self, kwarg, value)
-        
+
         self._answers = self.process_answers(raw_answers)
 
         if len(self.correct_answers) > 1:
             raise ValueError(f"Multiple correct answers provided for multiple choice question:\n\t{raw_answers}")
 
-    
+
     def process_answers(self, raw_answers):
         """
         Formats the raw answer input into something more usable.
@@ -87,7 +87,7 @@ class ManualMultipleChoiceQuestion(Question):
 
         if self.randomize_order:
             random.shuffle(out)
-        
+
         return out
 
 
@@ -99,6 +99,7 @@ class ManualMultipleChoiceQuestion(Question):
         for possible_answer, correct in self._answers:
             if correct:
                 return possible_answer
+        return None
 
     @property
     def correct_answers(self) -> list:
@@ -132,9 +133,9 @@ class ManualMultipleChoiceQuestion(Question):
         if self.image is not None:
             out += self.image
         out += f"{self.question}\n"
-        
+
         possible_answers = self._answers
-        for possible_answer, correctness in possible_answers:
+        for possible_answer, _ in possible_answers:
             out += f" - {possible_answer}\n"
         return out
 
@@ -153,7 +154,7 @@ class ManualMultipleChoiceQuestion(Question):
             correct_text = 'incorrect'
             if correct:
                 correct_text = 'correct'
-            
+
             out += f'{answer}\t{correct_text}\t'
 
         out = out[:-1]  # We drop the last tab here
@@ -163,12 +164,15 @@ class ManualMultipleChoiceQuestion(Question):
 
 
     @classmethod
-    def generate(cls, exam_spec, count: int = 5, section_data = {}) -> list:
+    def generate(cls, exam_spec, count: int = 5, section_data=None) -> list:
         """
         Generates an amount of manually input questions.
         """
         # Pylint gets this wrong:
         # pylint: disable=unsubscriptable-object
+
+        if section_data is None:
+            section_data = {}
 
         out = []
         selection = select_questions(cls, exam_spec, 'manual_multiple_choice_questions', count, section_data)
@@ -179,7 +183,7 @@ class ManualMultipleChoiceQuestion(Question):
                     exam_spec,
                     question_text,
                     selected_question['answers'],
-                    question_data= selected_question
+                    question_data=selected_question
                 )
             )
         return out

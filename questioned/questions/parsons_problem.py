@@ -3,7 +3,6 @@ This module defines the manual entry question.
 """
 
 import random
-import logging
 import html
 
 from questioned.utils import select_questions
@@ -15,19 +14,19 @@ class ParsonsProblem(Question):
     """
     Defines a parsons problem that is input manually using the exam_spec file.
 
-    This question type is based on a paper by Paul Denny, Andrex Luxton-Reilly 
-    and Beth Simon. The paper can be found at 
+    This question type is based on a paper by Paul Denny, Andrex Luxton-Reilly
+    and Beth Simon. The paper can be found at
     https://cseweb.ucsd.edu/classes/fa08/cse599/denny.pdf
-    
+
     Though the basic structure of this question type is similar to the one
     described in the paper. It does not support the more complex rubrics that
     would require a human to correct the exam.
-    
+
     Instead, it is best to focus on shorter code snippets where ordering is
     the main focus of the problem.
 
     The parsons problem requires additional information through the ``exam_spec``.
-    
+
     For example:
     ::
         parsons_problems:
@@ -45,10 +44,13 @@ class ParsonsProblem(Question):
                 return 0;}
 
     All parsons problems require at least a description and a code segment.
-    
+
     The code segment is automatically broken up into lines and jumbled for
     the assignment. As such it must be entered in the correct form.
     """
+
+    # The dynamic use of attributes in this class causes pylint to falsely flag no-member
+    # pylint: disable=no-member
 
     def render_blackboard(self):
         """
@@ -67,6 +69,8 @@ class ParsonsProblem(Question):
         else:
             image = ""
 
+        # In this case, this length is acceptable
+        # pylint: disable=line-too-long
         out = f"JUMBLED_SENTENCE\t{image}Please reassemble the following code snippets to form a {self.description}.<br/><br/>"
         out += "<pre>"
         for line in question_lines:
@@ -109,10 +113,17 @@ class ParsonsProblem(Question):
         return out
 
     @classmethod
-    def generate(cls, exam_spec, count: int = 1, section_data = {}):
+    def generate(cls, exam_spec, count: int = 1, section_data=None):
         """
         Generates an amount of manually input questions.
         """
+
+        # False positive
+        # pylint: disable=unsubscriptable-object
+
+        if section_data is None:
+            section_data = {}
+
         out = []
         selection = select_questions(cls, exam_spec, 'parsons_problems', count, section_data)
         for selected_problem in selection:

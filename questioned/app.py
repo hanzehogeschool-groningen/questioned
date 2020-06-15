@@ -2,7 +2,6 @@
 Contains the main application entry point.
 """
 
-import random
 import logging
 
 import click

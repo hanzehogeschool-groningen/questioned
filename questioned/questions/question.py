@@ -12,6 +12,10 @@ class Question():
     Can be extended to create different types of question.
     '''
 
+    # The dynamic nature of attrs in this class requires this flag:
+    # pylint: disable=no-member
+
+
     def __init__(self, exam_spec: dict, question: str, answer: str, *, question_data: dict = {}, **kwargs):
         """
         Constructor for question objects.
@@ -74,9 +78,10 @@ class Question():
 
         Requires that the ``image_path`` attribute be set.
         """
-        if not 'image' in self.question_data.keys():
+
+        if 'image' not in self.question_data.keys():
             return None
-        
+
         image_path = self.question_data['image']
 
         logging.debug('Encountered question with image path %s, encoding..', image_path)
@@ -84,16 +89,18 @@ class Question():
             image_base64 = base64.b64encode(image_file.read())
             if 'jpeg' in image_path or 'jpg' in image_path:
                 return f'<img src="data:image/jpeg;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
-            elif 'png' in image_path:
+            if 'png' in image_path:
                 return f'<img src="data:image/png;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
-            else:
-                raise ValueError(f'Unsupported image type for image: {self.image_path}')
+            raise ValueError(f'Unsupported image type for image: {self.image_path}')
 
     @classmethod
-    def generate(cls, exam_spec, count: int = 5, section_data = {}):
+    def generate(cls, exam_spec, count: int = 5, section_data=None):
         """
         Returns an amount of this object.
         """
+        if section_data is None:
+            section_data = {}
+
         out = []
         for _ in range(count):
             out.append(cls(exam_spec, "<<Generic Question>>", "<<Generic Answer>>"))
