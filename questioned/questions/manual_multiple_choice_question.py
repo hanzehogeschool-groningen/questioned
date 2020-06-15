@@ -128,9 +128,12 @@ class ManualMultipleChoiceQuestion(Question):
         """
         Renders the markdown output for this question.
         """
-        out = f"{self.question}\n"
+        out = ""
+        if self.image is not None:
+            out += self.image
+        out += f"{self.question}\n"
+        
         possible_answers = self._answers
-   
         for possible_answer, correctness in possible_answers:
             out += f" - {possible_answer}\n"
         return out
@@ -141,8 +144,11 @@ class ManualMultipleChoiceQuestion(Question):
         Renders the blackboard question.
         """
         out_question = self.question.replace('\n', '<br />')
-        out = f"MC\t{out_question}\t"
 
+        if self.image is not None:
+            out_question = self.image + out_question
+
+        out = f"MC\t{out_question}\t"
         for answer, correct in self._answers:
             correct_text = 'incorrect'
             if correct:
