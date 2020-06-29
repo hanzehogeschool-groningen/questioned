@@ -23,11 +23,16 @@ exam_content:
 - type: ManualOpenQuestion
   count: 1
   group: "editors"
+- type: ManualOpenQuestion
+  count: 1
+  group: "graphs"
 
 manual_open_questions:
 - question: "does this graph look cool?"
   answer: 'yes'
   image: "testimage.png"
+  image_size_percent: 50
+  group: "graphs"
 - question: "do you like computers?"
   answer: 'yes'
 - question: "what is the best text editor?"
@@ -70,6 +75,7 @@ parsons_problems:
     Test 4
 - description: "Pyramid printing function."
   image: "testimage.png"
+  image_size_percent: 200
   code: |
     #include<stdio.h>
     int main() {

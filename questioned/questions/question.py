@@ -77,20 +77,36 @@ class Question():
         base64 encoded form.
 
         Requires that the ``image_path`` attribute be set.
+
+        Images can be resized by specifying ``image_size_percent``.
         """
 
+        # Do nothing if there's no image
         if 'image' not in self.question_data.keys():
             return None
 
+        # Image resizing
+        if 'image_size_percent' in self.question_data.keys():
+            try:
+                image_size_percent = int(self.question_data['image_size_percent'])
+            except ValueError as exc:
+                logging.error("Invalid image size percentage: %s", self.question_data['image_size_percent'])
+                raise exc
+        else:
+            image_size_percent = 100
+
+        style = f"height: auto; width: {image_size_percent}%"
+
+        # Read and encode
         image_path = self.question_data['image']
 
         logging.debug('Encountered question with image path %s, encoding..', image_path)
         with open(image_path, 'rb') as image_file:
             image_base64 = base64.b64encode(image_file.read())
             if 'jpeg' in image_path or 'jpg' in image_path:
-                return f'<img src="data:image/jpeg;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
+                return f'<img style="{style}" src="data:image/jpeg;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
             if 'png' in image_path:
-                return f'<img src="data:image/png;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
+                return f'<img style="{style}" src="data:image/png;base64, {image_base64.decode("utf-8")}" /><br/><br/>'
             raise ValueError(f'Unsupported image type for image: {self.image_path}')
 
     @classmethod
