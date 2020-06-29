@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="Questioned",
-    version="0.4.3",
+    version="0.4.4",
     packages=find_packages(),
     include_package_data=True,
 
