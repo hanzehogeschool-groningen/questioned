@@ -17,7 +17,7 @@ setup(
 
     install_requires=[
         "click==7.1.1",
-        "PyYAML==5.3.1"
+        "PyYAML==5.4"
     ],
 
     entry_points='''
